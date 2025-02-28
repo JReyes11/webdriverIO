@@ -23,3 +23,5 @@ This is an automation project utilizing WebdriverIO and TypeScript, designed to 
 From the terminal, run: 
 
 `npm run wdio`
+
+![Starting the server](assets/webdriverIO.gif)
