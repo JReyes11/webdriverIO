@@ -22,10 +22,8 @@ export const config: WebdriverIO.Config = {
     // The path of the spec files will be resolved relative from the directory of
     // of the config file unless it's absolute.
     //
-    specs: [
-        // './test/specs/**/*.ts'
-        // './test/specs/**/*.spec.ts'
-        './test/specs/**/signup.spec.ts'
+    specs: [        
+        // './test/specs/**/*.spec.ts'        
     ],
     // Patterns to exclude.
     exclude: [
