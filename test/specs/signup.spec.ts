@@ -46,5 +46,4 @@ describe("User Signup Test Cases", () => {
     topNavigation.assertElementsDisplayed();
     sideNavigation.logout.click()
   });
-
 });

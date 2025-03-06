@@ -1,6 +1,7 @@
 import { $, expect } from "@wdio/globals";
 import sideNavObjects from "../pageobjects/sideNav.page";
 import contactList from '../fixtures/users.ts'
+import { testUserInterface } from "../types/interfaces.ts";
 
 class helper {
   public async assertSideMenuItems() {
@@ -16,9 +17,10 @@ class helper {
     await elem.waitForExist();
     await expect(elem).toHaveText(title);
   }
-  public async getRandomUser() {
+  public async getRandomUser(loggedInUser: testUserInterface) {
     const userList = await contactList.users()
-    return userList.users[Math.floor(Math.random() * userList.users.length)]
+    const selectUser = userList.users.filter(e => e.username != loggedInUser.username)
+    return selectUser[Math.floor(Math.random() * selectUser.length)]
   }
 }
 

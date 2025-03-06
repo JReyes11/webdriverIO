@@ -1,5 +1,6 @@
 import { $ } from "@wdio/globals";
 import { transaction } from "../types/interfaces.ts";
+import { DateTime } from "luxon";
 
 class transactionsPage {
   public get moneyIcon() {
@@ -29,6 +30,15 @@ class transactionsPage {
   public get friendsTab() {
     return $('[data-test="nav-contacts-tab"]');
   }
+  public get thumbsUpButton() {
+    return $("[data-testid=ThumbUpAltOutlinedIcon]");
+  }
+  public get transactionLikeButton() {
+    return $("[data-test*=transaction-like-button-]");
+  }
+  public get commentTextField() {
+    return $("[data-test*=transaction-comment-input-]");
+  }
   async performTransaction(dataObject: transaction) {
     await this.moneyIcon.click();
     await this.searchBar.setValue(dataObject.firstName);
@@ -37,7 +47,9 @@ class transactionsPage {
     );
     await findUserInResults.click();
     await this.amountField.setValue(dataObject.amount);
-    await this.notesField.setValue(dataObject.note);
+    await this.notesField.setValue(
+      DateTime.now().toFormat("MM/dd/yyyy HH:mm:ss")
+    );
     if (dataObject.type == "Requested") {
       await this.requestButton.click();
     } else {
@@ -58,7 +70,6 @@ class transactionsPage {
     );
     expect(confirmAmount).toContain(dataObject.amount);
   }
-
   async confirmationPageText(value: string) {
     const elems = await $$("//h2"); // Get all <h2> elements
     for (const elem of elems) {
@@ -68,6 +79,28 @@ class transactionsPage {
       }
     }
     return false;
+  }
+
+  async likeAndComment(userFirstName: string) {
+    const roleGroup = await $("[role=rowgroup]");
+    const items = await roleGroup.$$("[data-test*=transaction-item]");
+    for (const k of items) {
+      const elem = await $("[data-test=transaction-like-count]");
+      const likeCount = await elem.getText();
+      if (parseInt(likeCount) == 0) {
+        await elem.click();
+        break;
+      }
+    }
+    const thumbsUpBtn = this.transactionLikeButton;
+    expect(thumbsUpBtn).toBeDisplayed();
+    expect(thumbsUpBtn).toBeEnabled();
+    await thumbsUpBtn.click();
+    const commentField = this.commentTextField;
+    await commentField.click();
+    const currentDT = DateTime.now().toFormat("MM/dd/yyyy HH:mm:ss");
+    await commentField.addValue(`[${currentDT}] Approved by ${userFirstName}`);
+    await commentField.addValue("\uE007");
   }
 }
 

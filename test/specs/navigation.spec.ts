@@ -6,13 +6,12 @@ import notificationsPage from "../../pageobjects/notifications.page.ts";
 import topNavigation from "../../pageobjects/topNav.page.ts";
 import sideNavigation from "../../pageobjects/sideNav.page.ts";
 import helper from "../../support/helper.js";
-import testUser from "../../fixtures/myAccountPage.ts";
 import { testUserInterface } from "../../types/interfaces.ts";
 
 describe("Smoke Tests: Navigation Side Panel", () => {
   let userAccount: testUserInterface;
   beforeEach(async () => {
-    userAccount = await testUser.heath93();
+    userAccount = loginPage.randomUserLogin();
     await loginPage.open();
     await loginPage.login(userAccount.username, userAccount.password);
   });

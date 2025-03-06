@@ -1,5 +1,6 @@
 import { $ } from "@wdio/globals";
 import Page from "./page.js";
+import contactList from "../fixtures/users.js";
 
 class loginPage extends Page {
   public get inputUsername() {
@@ -18,6 +19,10 @@ class loginPage extends Page {
   }
   public open() {
     return super.open("login");
+  }
+  public randomUserLogin() {
+    const list = contactList.users();
+    return list.users[Math.floor(Math.random() * list.users.length)];
   }
 }
 
