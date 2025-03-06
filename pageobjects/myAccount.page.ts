@@ -1,21 +1,22 @@
 import { $, expect } from "@wdio/globals";
+import { ChainablePromiseElement } from "webdriverio";
 import { testUserInterface } from "../types/interfaces.ts";
 
 class myAccount {
-  public get firstName() {
+  public get firstName(): ChainablePromiseElement {
     return $("#user-settings-firstName-input");
   }
-  public get lastName() {
+  public get lastName(): ChainablePromiseElement {
     return $("#user-settings-lastName-input");
   }
-  public get emailAddress() {
+  public get emailAddress(): ChainablePromiseElement {
     return $("[data-test=user-settings-email-input]");
   }
-  public get phoneNumber() {
+  public get phoneNumber(): ChainablePromiseElement {
     return $("#user-settings-phoneNumber-input");
   }
-  public get saveButton() {
-    return $("[data-test=user-settings-submit]")
+  public get saveButton(): ChainablePromiseElement {
+    return $("[data-test=user-settings-submit]");
   }
   async verifyUserInformation(userAccount: testUserInterface) {
     const firstName = await this.firstName.getValue();
@@ -26,7 +27,7 @@ class myAccount {
     expect(email).toEqual(userAccount.email);
     const phoneNumber = await this.phoneNumber.getValue();
     expect(phoneNumber).toEqual(userAccount.phoneNumber);
-    const saveBtn = this.saveButton
+    const saveBtn = this.saveButton;
     expect(saveBtn).toBeEnabled();
   }
 }

@@ -14,12 +14,16 @@ export interface userSignUp {
   confirmPassword: string;
 }
 export interface testUserInterface {
+  id: string;
+  firstName: string;
+  lastName: string;
   username: string;
   password: string;
   email: string;
   phoneNumber: string;
-  firstName: string;
-  lastName: string;
+  amount: string;
+  note: string;
+  type: string;
 }
 
 export interface transaction {

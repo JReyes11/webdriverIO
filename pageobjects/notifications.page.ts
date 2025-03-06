@@ -1,5 +1,5 @@
 class notificationsPage{
-    public get list() {
+    public get list(): ChainablePromiseElement  {
         return $('[data-test=notifications-list]')
     }
 }

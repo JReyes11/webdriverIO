@@ -2,36 +2,36 @@ import { userSignUp } from "../types/interfaces.ts";
 import { faker } from "@faker-js/faker";
 
 class signup {
-  public get signupLink() {
+  public get signupLink(): ChainablePromiseElement {
     return $('[data-test="signup"]');
   }
-  public get firstName() {
+  public get firstName(): ChainablePromiseElement {
     return $("#firstName");
   }
-  public get lastName() {
+  public get lastName(): ChainablePromiseElement {
     return $("#lastName");
   }
-  public get username() {
+  public get username(): ChainablePromiseElement {
     return $("#username");
   }
-  public get password() {
+  public get password(): ChainablePromiseElement {
     return $("#password");
   }
-  public get confirmPassword() {
+  public get confirmPassword(): ChainablePromiseElement {
     return $("#confirmPassword");
   }
-  public get submitBtn() {
+  public get submitBtn(): ChainablePromiseElement {
     return $("[data-test=signup-submit]");
   }
-  public get firstNameHelperText() {
-    return $('#firstName-helper-text')
+  public get firstNameHelperText(): ChainablePromiseElement {
+    return $("#firstName-helper-text");
   }
   async populateForm(userObject: userSignUp) {
     await this.firstName.setValue(userObject.firstName);
     await this.lastName.setValue(userObject.lastName);
     await this.username.setValue(userObject.username);
     await this.password.setValue(userObject.password);
-    await this.confirmPassword.setValue(userObject.confirmPassword);    
+    await this.confirmPassword.setValue(userObject.confirmPassword);
   }
   generateUserData() {
     const name = faker.person.firstName();

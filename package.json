@@ -1,7 +1,9 @@
 {
-  "name": "webdriverIO",
+  "name": "webdriverIO: Automation Tests",
   "type": "module",
+  "author": "JoseReyes",
   "devDependencies": {
+    "@types/luxon": "^3.4.2",
     "@wdio/cli": "^9.10.0",
     "@wdio/local-runner": "^9.10.0",
     "@wdio/mocha-framework": "^9.9.0",
@@ -11,9 +13,12 @@
     "wdio": "wdio run ./wdio.conf.ts"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.4.0",
     "@types/chai": "^5.0.1",
+    "@wdio/devtools-service": "^8.42.0",
+    "axios": "^1.8.1",
     "chai": "^5.2.0",
-     "@faker-js/faker": "^9.4.0",
-    "dayjs": "^1.11.13"
+    "dayjs": "^1.11.13",
+    "luxon": "^3.5.0"
   }
 }
