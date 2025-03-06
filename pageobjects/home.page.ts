@@ -1,5 +1,5 @@
 class homePage {
-  public get transactionList() {
+  public get transactionList(): ChainablePromiseElement  {
     return $("[data-test=transaction-list]");
   } 
 }

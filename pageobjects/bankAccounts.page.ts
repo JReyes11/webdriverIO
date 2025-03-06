@@ -1,31 +1,31 @@
 import { expect } from "@wdio/globals";
 
 class bankAccountsPage {
-  public get modalTitle() {
+  public get modalTitle(): ChainablePromiseElement  {
     return $("[data-test=user-onboarding-dialog-title]");
   }
-  public get modalNextButton() {
+  public get modalNextButton(): ChainablePromiseElement  {
     return $("[data-test=user-onboarding-next]");
   }
-  public get modalBankTitle() {
+  public get modalBankTitle(): ChainablePromiseElement  {
     return $("data-test=user-onboarding-dialog-title");
   }
-  public get modalNameInput() {
+  public get modalNameInput(): ChainablePromiseElement  {
     return $("#bankaccount-bankName-input");
   }
-  public get modalRoutingInput() {
+  public get modalRoutingInput(): ChainablePromiseElement  {
     return $("#bankaccount-routingNumber-input");
   }
-  public get modalAccountNumberInput() {
+  public get modalAccountNumberInput(): ChainablePromiseElement  {
     return $("#bankaccount-accountNumber-input");
   }
-  public get modalSaveButton() {
+  public get modalSaveButton(): ChainablePromiseElement  {
     return $("[data-test=bankaccount-submit]");
   }
-  public get modalFinishedButton() {
+  public get modalFinishedButton(): ChainablePromiseElement  {
     return $("[data-test=user-onboarding-next]");
   }
-  public async confirmNewUserModal() {
+  public async confirmNewUserModal(): ChainablePromiseElement  {
     expect(this.modalTitle).toBeDisplayed();
     this.modalNextButton.click();
   }
@@ -33,10 +33,10 @@ class bankAccountsPage {
     const elem = $("div h2");
     await elem.waitForExist();
   }  
-  public get createButton() {
+  public get createButton(): ChainablePromiseElement  {
     return $("[data-test=bankaccount-new]");
   }
-  public get deleteButton() {
+  public get deleteButton(): ChainablePromiseElement  {
     return $("[data-test=bankaccount-delete]");
   }
   public async populateNewAccountFields(text: string) {

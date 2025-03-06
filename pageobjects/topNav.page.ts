@@ -1,14 +1,14 @@
 class topNavigation {
-  public get menuIcon() {
+  public get menuIcon(): ChainablePromiseElement {
     return $("[data-testid=MenuIcon]");
   }
-  public get appNameLogo() {
+  public get appNameLogo(): ChainablePromiseElement {
     return $(".NavBar-logo");
   }
-  public get newButton() {
+  public get newButton(): ChainablePromiseElement {
     return $("[data-testid=AttachMoneyIcon]");
   }
-  public get notificationsIcon() {
+  public get notificationsIcon(): ChainablePromiseElement {
     return $("[data-testid=NotificationsIcon]");
   }
   assertElementsDisplayed() {

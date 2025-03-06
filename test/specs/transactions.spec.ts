@@ -8,7 +8,7 @@ import { testUserInterface } from "../../types/interfaces.ts";
 
 describe("Transactions test Cases", () => {
   let userAccount: testUserInterface;  
-  beforeEach(async () => {    
+  beforeEach(async () => {  
     userAccount = loginPage.randomUserLogin()    
     await loginPage.open();
     await loginPage.login(userAccount.username, userAccount.password);
@@ -38,7 +38,18 @@ describe("Transactions test Cases", () => {
     sideNavigation.logout.click();
   });
 
-  it("Like and comment on friends transaction", async () => {            
-    await transactionsPage.likeAndComment(userAccount.firstName)    
+  it("Like and comment on friends transaction", async () => {   
+    //locate and click on transaction that has zero likes
+    await transactionsPage.findTransaction(0)
+    // click on thumbsUp button
+    const thumbsUpBtn = transactionsPage.transactionLikeButton;    
+    expect(thumbsUpBtn).toBeEnabled();
+    await thumbsUpBtn.click();
+    // Click on comment field and enter comment 
+    const commentField = transactionsPage.commentTextField;
+    await commentField.click();
+    const currentDT = await transactionsPage.getTimestamp()
+    await commentField.addValue(`[${currentDT}] Approved by ${userAccount.firstName}`);
+    await commentField.addValue("\uE007");
   })
 });

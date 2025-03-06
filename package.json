@@ -15,6 +15,8 @@
   "dependencies": {
     "@faker-js/faker": "^9.4.0",
     "@types/chai": "^5.0.1",
+    "@wdio/devtools-service": "^8.42.0",
+    "axios": "^1.8.1",
     "chai": "^5.2.0",
     "dayjs": "^1.11.13",
     "luxon": "^3.5.0"

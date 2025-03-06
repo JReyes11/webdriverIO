@@ -1,25 +1,25 @@
 import { $ } from "@wdio/globals";
 
 class sideNavigation {
-  public get userFullName() {
+  public get userFullName(): ChainablePromiseElement {
     return $("[data-test=sidenav-user-full-name]");
   }
-  public get homeButton() {
+  public get homeButton(): ChainablePromiseElement {
     return $('[data-test="sidenav-home"]');
   }
-  public get myAccount() {
+  public get myAccount(): ChainablePromiseElement {
     return $("[data-test=sidenav-user-settings]");
   }
-  public get bankAccounts() {
+  public get bankAccounts(): ChainablePromiseElement {
     return $('[data-test="sidenav-bankaccounts"]');
   }
-  public get notifications() {
+  public get notifications(): ChainablePromiseElement {
     return $('[data-test="sidenav-notifications"]');
   }
-  public get logout() {
+  public get logout(): ChainablePromiseElement {
     return $("[data-testid=ExitToAppIcon]");
   }
-  assertElementsDisplayed() {
+  assertElementsDisplayed(): ChainablePromiseElement {
     expect(this.userFullName).toBeDisplayed();
     expect(this.homeButton).toBeDisplayed();
     expect(this.myAccount).toBeDisplayed();
@@ -27,7 +27,7 @@ class sideNavigation {
     expect(this.notifications).toBeDisplayed();
     expect(this.logout).toBeDisplayed();
   }
-  assertElementsNotDisplayed() {
+  assertElementsNotDisplayed(): ChainablePromiseElement {
     expect(this.userFullName).not.toBeDisplayed();
     expect(this.homeButton).not.toBeDisplayed();
     expect(this.myAccount).not.toBeDisplayed();

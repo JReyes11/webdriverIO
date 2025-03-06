@@ -3,13 +3,13 @@ import Page from "./page.js";
 import contactList from "../fixtures/users.js";
 
 class loginPage extends Page {
-  public get inputUsername() {
+  public get inputUsername(): ChainablePromiseElement {
     return $("#username");
   }
-  public get inputPassword() {
+  public get inputPassword(): ChainablePromiseElement {
     return $("#password");
   }
-  public get btnSubmit() {
+  public get btnSubmit(): ChainablePromiseElement {
     return $('button[type="submit"]');
   }
   public async login(username: string, password: string) {

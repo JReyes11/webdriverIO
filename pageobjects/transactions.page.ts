@@ -3,41 +3,51 @@ import { transaction } from "../types/interfaces.ts";
 import { DateTime } from "luxon";
 
 class transactionsPage {
-  public get moneyIcon() {
+  public get moneyIcon(): ChainablePromiseElement {
     return $("[data-testid=AttachMoneyIcon]");
   }
-  public get searchBar() {
+  public get searchBar(): ChainablePromiseElement {
     return $("[data-test=user-list-search-input]");
   }
   public async finderUserInSearchResults(userId: string) {
     return $(`[data-test=user-list-item-${userId}]`);
   }
-  public get amountField() {
+  public get amountField(): ChainablePromiseElement {
     return $("#amount");
   }
-  public get notesField() {
+  public get notesField(): ChainablePromiseElement {
     return $("#transaction-create-description-input");
   }
-  public get requestButton() {
+  public get requestButton(): ChainablePromiseElement {
     return $("[data-test=transaction-create-submit-request]");
   }
-  public get payButton() {
+  public get everyoneTab(): ChainablePromiseElement {
+    return $("[data-test=nav-public-tab]");
+  }
+  public get payButton(): ChainablePromiseElement {
     return $("[data-test=transaction-create-submit-payment]");
   }
-  public get mineTab() {
+  public get mineTab(): ChainablePromiseElement {
     return $("[data-test=nav-personal-tab]");
   }
-  public get friendsTab() {
+  public get friendsTab(): ChainablePromiseElement {
     return $('[data-test="nav-contacts-tab"]');
   }
-  public get thumbsUpButton() {
+  public get thumbsUpButton(): ChainablePromiseElement {
     return $("[data-testid=ThumbUpAltOutlinedIcon]");
   }
-  public get transactionLikeButton() {
+  public get transactionLikeButton(): ChainablePromiseElement {
     return $("[data-test*=transaction-like-button-]");
   }
-  public get commentTextField() {
+  public get commentTextField(): ChainablePromiseElement {
     return $("[data-test*=transaction-comment-input-]");
+  }
+  public get transactionsTable(): ChainablePromiseElement {
+    return $("[role=rowgroup]");
+  }
+  public get transactionLikes(): ChainablePromiseElement {
+    const roleGroup = this.transactionsTable;
+    return roleGroup.$$("[data-test=transaction-like-count]");
   }
   async performTransaction(dataObject: transaction) {
     await this.moneyIcon.click();
@@ -80,27 +90,23 @@ class transactionsPage {
     }
     return false;
   }
+  async getTimestamp() {
+    return DateTime.now().toFormat("MM/dd/yyyy HH:mm:ss");
+  }
 
-  async likeAndComment(userFirstName: string) {
-    const roleGroup = await $("[role=rowgroup]");
-    const items = await roleGroup.$$("[data-test*=transaction-item]");
-    for (const k of items) {
-      const elem = await $("[data-test=transaction-like-count]");
-      const likeCount = await elem.getText();
-      if (parseInt(likeCount) == 0) {
-        await elem.click();
+  async findTransaction(count: number) {
+    const likes = await this.transactionLikes;
+    for (const k of likes) {
+      const likesCount = await k.getText();
+      if (parseInt(likesCount) == count) {
+        await k.click();
         break;
+      } else {
+        throw new Error(
+          `There were no transactions with ${count} likes found!`
+        );
       }
     }
-    const thumbsUpBtn = this.transactionLikeButton;
-    expect(thumbsUpBtn).toBeDisplayed();
-    expect(thumbsUpBtn).toBeEnabled();
-    await thumbsUpBtn.click();
-    const commentField = this.commentTextField;
-    await commentField.click();
-    const currentDT = DateTime.now().toFormat("MM/dd/yyyy HH:mm:ss");
-    await commentField.addValue(`[${currentDT}] Approved by ${userFirstName}`);
-    await commentField.addValue("\uE007");
   }
 }
 

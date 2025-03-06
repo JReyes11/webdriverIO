@@ -15,6 +15,10 @@ describe("Smoke Tests: Navigation Side Panel", () => {
     await loginPage.open();
     await loginPage.login(userAccount.username, userAccount.password);
   });
+  afterEach(async () => {
+    const logout = await sideNavigation.logout
+    await logout.click()
+  })
 
   it("Home Page: Expand, Collapse, Navigate, Assert Elements.", async () => {
     topNavigation.assertElementsDisplayed(); // assert top nav menu
